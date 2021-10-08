@@ -1,6 +1,6 @@
 # ansible-iot-server
 
-**/!\ Work In Progress /!\**
+/!\\ **Work In Progress** /!\\
 
 Install a server dedicated to IOT tooling/monitoring/etc.
 
