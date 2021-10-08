@@ -1,0 +1,37 @@
+- name: Install nodejs 12 installer
+  shell: "curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -"
+
+# - name: Install NodeRed
+#   shell: npm install -g --unsafe-perm node-red
+
+- name: Install nodejs
+  apt:
+    name:
+      - nodejs
+    state: present
+    update_cache: yes
+
+- name: Install forever package
+  npm:
+    name: forever
+    global: yes
+    state: present
+
+- name: Node RED
+  npm:
+    name: node-red
+    global: yes
+    production: yes
+    state: present
+
+# - name: Run Node RED
+#   shell: forever start /usr/local/bin/node-red
+
+# - name: Copy nodered config files
+#   copy:
+#     src: "settings.js"
+#     dest: "/root/.node-red/settings.js"
+#     owner: root
+#     group: root
+#     mode: '0644'
+  # notify: Restart NodeRed

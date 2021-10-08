@@ -1,0 +1,27 @@
+
+- name: Add Mosquitto repository key
+  apt_key: 
+    url: http://repo.mosquitto.org/debian/mosquitto-repo.gpg.key
+    state: present
+
+- name: Add Mosquitto repository
+  apt_repository:
+    repo: deb https://repo.mosquitto.org/debian buster main
+    state: present
+    filename: mosquitto
+
+- name: Install Mosquitto
+  apt:
+    name:
+      - mosquitto
+    state: present
+    update_cache: yes
+
+- name: Copy mosquitto config files
+  copy:
+    src: "custom.conf"
+    dest: "/etc/mosquitto/conf.d/custom.conf"
+    owner: root
+    group: root
+    mode: '0644'
+  notify: Restart Mosquitto

@@ -1,0 +1,12 @@
+- name: Install required packages
+  apt:
+      name:
+          - apt-transport-https
+          - curl
+          - git
+          - gcc
+          - g++
+          - make
+      state: present
+      update_cache: yes
+
