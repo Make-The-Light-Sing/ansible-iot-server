@@ -1,5 +1,6 @@
 - name: Install nodejs 12 installer
   shell: "curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -"
+    # warn: false
 
 # - name: Install NodeRed
 #   shell: npm install -g --unsafe-perm node-red
@@ -27,11 +28,24 @@
 # - name: Run Node RED
 #   shell: forever start /usr/local/bin/node-red
 
-# - name: Copy nodered config files
-#   copy:
-#     src: "settings.js"
-#     dest: "/root/.node-red/settings.js"
-#     owner: root
-#     group: root
-#     mode: '0644'
-  # notify: Restart NodeRed
+- name: Copy nodered config files
+  copy:
+    src: "settings.js"
+    dest: "/root/.node-red/settings.js"
+    owner: root
+    group: root
+    mode: '0644'
+  notify: Restart NodeRed
+
+- name: Install pm2
+  npm:
+    name: pm2
+    global: yes
+    production: yes
+    state: present
+
+- name: Enable node-red on pm2
+  shell: |
+    pm2 start /usr/bin/node-red -- -v
+    pm2 save
+    pm2 startup
