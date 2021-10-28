@@ -12,11 +12,11 @@
     state: present
     update_cache: yes
 
-- name: Install forever package
-  npm:
-    name: forever
-    global: yes
-    state: present
+# - name: Install forever package
+#   npm:
+#     name: forever
+#     global: yes
+#     state: present
 
 - name: Node RED
   npm:
@@ -57,3 +57,8 @@
     group: root
     mode: '0644'
   notify: Restart NodeRed
+
+# - name: Generate password
+#   shell: node -e "console.log(require('bcryptjs').hashSync(process.argv[1], 8));" your-password-here
+#   args:
+#     chdir: /usr/lib/node_modules/node-red
