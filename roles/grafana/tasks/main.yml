@@ -16,3 +16,13 @@
       - grafana
     state: present
     update_cache: yes
+  notify: Restart Grafana
+
+- name: Add Grafana Vhost
+  template:
+    src: vhost.conf.j2
+    dest: '/etc/nginx/sites-enabled/grafana.conf'
+    owner: root
+    group: root
+    mode: '0644'
+  notify: Restart Nginx  

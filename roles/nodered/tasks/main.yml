@@ -62,3 +62,12 @@
 #   shell: node -e "console.log(require('bcryptjs').hashSync(process.argv[1], 8));" your-password-here
 #   args:
 #     chdir: /usr/lib/node_modules/node-red
+
+- name: Add NodeRed Vhost
+  template:
+    src: vhost.conf.j2
+    dest: '/etc/nginx/sites-enabled/nodered.conf'
+    owner: root
+    group: root
+    mode: '0644'
+  notify: Restart Nginx  

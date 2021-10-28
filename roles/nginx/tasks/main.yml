@@ -1,0 +1,10 @@
+---
+- name: Install NGinx
+  apt:
+    name: nginx
+    state: present
+
+- include_tasks: amplify.yml
+  when:
+    - nginx_amplify is defined
+    - nginx_amplify == true

@@ -5,5 +5,8 @@
     - role: common
     - role: mosquitto
     - role: nodered
+      tags: ['nodered']
     - role: grafana
       tags: ['grafana']
+    - role: nginx
+      tags: ['nginx']
