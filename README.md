@@ -15,3 +15,12 @@ Services:
 - Clone the project
 - Create a directory `host_vars`
 - In this directory create a file `jlab-iot.yml` and add the ansible connection configuration (`ansible_host`, `ansible_user`, etc...)
+
+
+## Other
+
+https://github.com/cloudalchemy/ansible-prometheus
+ansible-galaxy install -r requirements.yml 
+
+Grafana Dashboard:
+- Grafana: 3590

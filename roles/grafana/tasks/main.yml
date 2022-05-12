@@ -18,6 +18,9 @@
     update_cache: yes
   notify: Restart Grafana
 
+- name: Register grafana service
+  shell: systemctl enable grafana-server.service
+
 - name: Add Grafana Vhost
   template:
     src: vhost.conf.j2
@@ -25,4 +28,5 @@
     owner: root
     group: root
     mode: '0644'
-  notify: Restart Nginx  
+  notify: Restart Nginx
+  when: false

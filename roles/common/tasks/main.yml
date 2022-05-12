@@ -6,6 +6,7 @@
           - git
           - gcc
           - g++
+          - htop
           - make
       state: present
       update_cache: yes
