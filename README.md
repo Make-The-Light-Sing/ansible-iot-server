@@ -20,7 +20,13 @@ Services:
 ## Other
 
 https://github.com/cloudalchemy/ansible-prometheus
+https://github.com/cloudalchemy/ansible-grafana
 ansible-galaxy install -r requirements.yml 
+
+Ports:
+- Grafana: 3000
+- Prometheus: 
+- Nodered: 1880
 
 Grafana Dashboard:
 - Grafana: 3590

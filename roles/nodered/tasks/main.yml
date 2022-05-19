@@ -45,9 +45,11 @@
   apt:
     name: certbot
     state: present
+  when: nodered_user_certificate
 
 - name: Generate certificates
   shell: certbot certonly --standalone -m {{ certbot_email }} -d {{ certbot_domain }} --agree-tos -n
+  when: nodered_user_certificate
 
 - name: Copy nodered config files
   template:
@@ -57,6 +59,15 @@
     group: root
     mode: '0644'
   notify: Restart NodeRed
+
+- name: Install additional packages
+  npm:
+    name: '{{ item }}'
+    path: /root/.node-red
+    production: yes
+    state: present
+  with_items: '{{ nodered_additional_packages }}'
+  # @Todo add handler to restart nodered
 
 # - name: Generate password
 #   shell: node -e "console.log(require('bcryptjs').hashSync(process.argv[1], 8));" your-password-here
@@ -70,4 +81,5 @@
     owner: root
     group: root
     mode: '0644'
-  notify: Restart Nginx  
+  notify: Restart Nginx
+  when: nodered_nginx_vhost

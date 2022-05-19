@@ -96,6 +96,7 @@ module.exports = {
     //},
 
     /** Option 2: function that returns the HTTP configuration object */
+    {% if nodered_user_certificate %}
     https: function() {
         // This function should return the options object, or a Promise
         // that resolves to the options object
@@ -104,6 +105,7 @@ module.exports = {
             cert: require("fs").readFileSync('/etc/letsencrypt/live/{{ certbot_domain }}/cert.pem')
         }
     },
+    {% endif %}
 
     /** If the `https` setting is a function, the following setting can be used
      * to set how often, in hours, the function will be called. That can be used

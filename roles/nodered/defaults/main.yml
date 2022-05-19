@@ -1,2 +1,5 @@
 certbot_email: devci@j3ck3l.me
 certbot_domain: iot.j3ck3l.me
+
+nodered_additional_packages:
+  - node-red-contrib-prometheus-exporter

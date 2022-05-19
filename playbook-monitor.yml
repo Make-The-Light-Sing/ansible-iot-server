@@ -1,0 +1,39 @@
+---
+- hosts: prometheus
+  gather_facts: true
+  roles:
+    - role: common
+    - role: cloudalchemy.prometheus
+      vars:
+        prometheus_targets:
+          node:
+            - targets:
+                - 127.0.0.1:9100  # node exporter
+                - 127.0.0.1:3000  # grafana
+                - 127.0.0.1:1880  # NodeRed
+              labels:
+                env: localhost
+    - role: cloudalchemy.grafana
+      vars:
+        grafana_security:
+          admin_user: admin
+          admin_password: admin123
+        grafana_datasources:
+          - name: prometheus
+            type: prometheus
+            access: proxy
+            url: 'http://localhost:9090'
+            basicAuth: false
+        grafana_dashboards:
+          - dashboard_id: 3590
+            revision_id: 1
+            datasource: prometheus
+    - role: node-exporter
+      vars:
+        node_exporter_version: 1.3.1
+        node_exporter_arch: amd64
+    - role: nodered
+      vars:
+        nodered_user_certificate: false
+        nodered_nginx_vhost: false
+        domain_name: '{{ ansible_host }}'
