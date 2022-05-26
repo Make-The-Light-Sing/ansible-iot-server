@@ -1,0 +1,24 @@
+# this is required to proxy Grafana Live WebSocket connections.
+map $http_upgrade $connection_upgrade {
+  default upgrade;
+  '' close;
+}
+
+server {
+    	listen 80;
+	    listen [::]:80;
+
+    	#server_name node-red.your_domain_name.com;
+    	root /var/www/html;
+    	index index.html index.htm index.nginx-debian.html;
+
+    	location = /robots.txt {
+    		add_header  Content-Type  text/plain;
+    		return 200 "User-agent: *\nDisallow: /\n";
+    	}
+
+    	{% include 'nodered.conf.j2' %}
+    	{% include 'grafana.conf.j2' %}
+    	{% include 'prometheus.conf.j2' %}
+
+}

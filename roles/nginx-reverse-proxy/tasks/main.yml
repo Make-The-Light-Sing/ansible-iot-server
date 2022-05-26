@@ -1,0 +1,30 @@
+---
+- name: Install NGinx
+  package:
+    name: nginx
+    state: present
+
+- name: Remove default VHost
+  file:
+    path: /etc/nginx/sites-enabled/default
+    state: absent
+
+- name: Install index.html
+  copy:
+    src: "index.html"
+    dest: "/var/www/html/index.html"
+    owner: www-data
+    group: www-data
+    mode: '0644'
+
+- name: Add VHost config
+  template:
+    src: main.conf.j2
+    dest: '/etc/nginx/sites-enabled/000-main.conf'
+  notify: Restart Nginx
+
+#- name: Add VHOST NodeRed
+#  template:
+#    src: nodered.conf.j2
+#    dest: '/etc/nginx/sites-enabled/nodered.conf'
+#  notify: Restart Nginx
