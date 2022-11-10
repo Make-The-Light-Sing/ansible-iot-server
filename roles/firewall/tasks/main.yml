@@ -23,3 +23,10 @@
     direction: in
     proto: tcp
     from_ip: 109.2.161.35
+- name: Allow mqtt
+  community.general.ufw:
+    rule: allow
+    port: '1883'
+    direction: in
+#    proto: tcp
+    from_ip: 109.2.161.35
