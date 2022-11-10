@@ -1,0 +1,25 @@
+---
+- name: Install required packages
+  apt:
+    name: ufw
+- command: "ufw --force reset"
+- name: Enabling UFW, deny all traffic
+  community.general.ufw:
+    state: enabled
+    policy: deny
+- name: Set logging
+  community.general.ufw:
+    logging: 'on'
+- name: Allow ssh
+  community.general.ufw:
+    rule: allow
+    port: '22'
+    direction: in
+    proto: tcp
+- name: Allow nginx
+  community.general.ufw:
+    rule: allow
+    port: '80'
+    direction: in
+    proto: tcp
+    from_ip: 109.2.161.35

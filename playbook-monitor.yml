@@ -1,5 +1,5 @@
 ---
-- hosts: prometheus
+- hosts: jlab-iot
   gather_facts: true
 
   pre_tasks:
@@ -69,3 +69,5 @@
       tags: [nodered]
     - role: nginx-reverse-proxy
       tags: [nginx, nodered]
+    - role: firewall
+      tags: [firewall]
